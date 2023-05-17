@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,400;0,700;1,700&family=Itim&family=Josefin+Sans&family=Kanit:wght@100;200&family=KoHo&family=Maitree&family=Mali&family=Mitr&family=Oswald&family=Rajdhani:wght@300;400&family=Roboto&family=Sriracha&family=Teko&display=swap");
+
+* {
+    font-family: "IBM Plex Sans", sans-serif;
+}
+
+body {
+    position: relative;
+}
+
+form .input-group {
+    width: 45rem;
+    height: 2.5rem;
+}
+
+form .input-group input {
+    font-size: 21px;
+}
+
+form .btn {
+    font-size: 23px;
+    width: 26rem;
+    height: 3rem;
+}
