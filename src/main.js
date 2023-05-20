@@ -1,6 +1,8 @@
 // import libs
 import 'chart.js';
-
+import 'sweetalert2';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 // import components
 import Navabar from './components/navbar.js';
 import Form, { search } from './components/form.js';
