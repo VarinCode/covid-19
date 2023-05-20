@@ -1,16 +1,22 @@
 import { getData } from '/api/api.js';
-import { createChart } from './chart';
+import { createChart } from './chart.js';
+
+import Swal from 'sweetalert2';
+import 'chart.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const search = () => {
     event.preventDefault();
-    const data = getData;
-    data.then(val => {
-        val.filter((value , index) => {
-            if(value.province === event.target[0].value){
-                    document.querySelector('.content').innerHTML = `
+    getData.then((val) => {
+        const province = val.map((item) => item.province);
+        let index = province.indexOf(event.target[0].value.toString());
+        if(index >= 0 && Number.isInteger(index)){ 
+            const data = val[index]; // ข้อมูลรายจังหวัด
+            document.querySelector('.content').innerHTML = `
                     <div class="row my-5">
                         <div class="col-12 bg-success p-2 text-dark bg-opacity-25">
-                            <h2>วันที่อัปเดตล่าสุด ${value.update_date}</h2>
+                            <h2>วันที่อัปเดตล่าสุด ${data.update_date}</h2>
                         </div>
                     </div>
                     <div class="row my-5 gap-5">
@@ -18,14 +24,14 @@ const search = () => {
                             <div class="card-body">
                                 <i class="bi bi-geo-alt-fill fs-1"></i>
                                 <h2 class="card-header mb-3 bg-white">จังหวัด</h2>
-                                <h3 class="card-title">${value.province}</h3>
+                                <h3 class="card-title">${data.province}</h3>
                             </div>
                         </div>
                         <div class="card col-5 shadow p-3 rounded  border-0 ">
                             <div class="card-body">
                                 <i class="bi bi-hospital-fill fs-1"></i>
                                 <h2 class="card-header mb-3 bg-white">ผู้ป่วยรายใหม่</h2>
-                                <h3 class="card-title">${value.new_case}</h3>
+                                <h3 class="card-title">${data.new_case}</h3>
                             </div>
                         </div>
                     </div>
@@ -34,24 +40,74 @@ const search = () => {
                     <div class="card-body">
                         <i class="bi bi-heart-pulse-fill fs-1"></i>
                         <h2 class="card-header mb-3 bg-white">ผู้ป่วยสะสม</h2>
-                        <h3 class="card-title">${value.total_case}</h3>
+                        <h3 class="card-title">${data.total_case}</h3>
                     </div>
                     </div>
                     <div class="card col-5 shadow p-3 rounded  border-0 ">
                         <div class="card-body">
                             <i class="bi bi-clipboard2-pulse-fill fs-1"></i>
                             <h2 class="card-header mb-3 bg-white">ผู้ป่วยเสียชีวิตรายใหม่</h2>
-                            <h3 class="card-title">${value.new_death}</h3>
+                            <h3 class="card-title">${data.new_death}</h3>
                         </div>
                     </div>
                     </div>
                 `
                 createChart();
-                
-            } 
-        })
+                // process.exit();
+        } else if(index < 0){
+            Swal.fire({
+                icon: 'error',
+                title: 'Error!',
+                text: 'เกิดข้อผิดพลาดขึ้นโปรดพิมพ์ชื่อจังหวัดให้ถูกต้อง!',
+              })
+        }
+        // val.filter((value , index) => {
+        //     if(value.province === event.target[0].value){
+        //             document.querySelector('.content').innerHTML = `
+        //             <div class="row my-5">
+        //                 <div class="col-12 bg-success p-2 text-dark bg-opacity-25">
+        //                     <h2>วันที่อัปเดตล่าสุด ${value.update_date}</h2>
+        //                 </div>
+        //             </div>
+        //             <div class="row my-5 gap-5">
+        //                 <div class="card col-5 shadow p-3 rounded  border-0 ">
+        //                     <div class="card-body">
+        //                         <i class="bi bi-geo-alt-fill fs-1"></i>
+        //                         <h2 class="card-header mb-3 bg-white">จังหวัด</h2>
+        //                         <h3 class="card-title">${value.province}</h3>
+        //                     </div>
+        //                 </div>
+        //                 <div class="card col-5 shadow p-3 rounded  border-0 ">
+        //                     <div class="card-body">
+        //                         <i class="bi bi-hospital-fill fs-1"></i>
+        //                         <h2 class="card-header mb-3 bg-white">ผู้ป่วยรายใหม่</h2>
+        //                         <h3 class="card-title">${value.new_case}</h3>
+        //                     </div>
+        //                 </div>
+        //             </div>
+        //             <div class="row my-5 gap-5">
+        //             <div class="card col-5 shadow p-3 rounded  border-0 ">
+        //             <div class="card-body">
+        //                 <i class="bi bi-heart-pulse-fill fs-1"></i>
+        //                 <h2 class="card-header mb-3 bg-white">ผู้ป่วยสะสม</h2>
+        //                 <h3 class="card-title">${value.total_case}</h3>
+        //             </div>
+        //             </div>
+        //             <div class="card col-5 shadow p-3 rounded  border-0 ">
+        //                 <div class="card-body">
+        //                     <i class="bi bi-clipboard2-pulse-fill fs-1"></i>
+        //                     <h2 class="card-header mb-3 bg-white">ผู้ป่วยเสียชีวิตรายใหม่</h2>
+        //                     <h3 class="card-title">${value.new_death}</h3>
+        //                 </div>
+        //             </div>
+        //             </div>
+        //         `
+        //         createChart();
+        //         process.exit();
+        //     } 
+        //     index += 1;
+        // })
     })
-    
 }
 
 export { search };
