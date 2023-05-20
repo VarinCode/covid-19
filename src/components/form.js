@@ -11,8 +11,8 @@ const search = () => {
     getData.then((val) => {
         const province = val.map((item) => item.province);
         let index = province.indexOf(event.target[0].value.toString());
-        if(index >= 0 && Number.isInteger(index)){ 
-            const data = val[index]; // ข้อมูลรายจังหวัด
+        if (index >= 0 && Number.isInteger(index)) {
+            const data = val[index]; // ข้อมูลที่ค้นหา
             document.querySelector('.content').innerHTML = `
                     <div class="row my-5">
                         <div class="col-12 bg-success p-2 text-dark bg-opacity-25">
@@ -52,66 +52,66 @@ const search = () => {
                     </div>
                     </div>
                 `
-                createChart();
-                // process.exit();
-        } else if(index < 0){
+            createChart();
+        } else if (index < 0) {
             Swal.fire({
                 icon: 'error',
                 title: 'Error!',
                 text: 'เกิดข้อผิดพลาดขึ้นโปรดพิมพ์ชื่อจังหวัดให้ถูกต้อง!',
-              })
+            })
         }
-        // val.filter((value , index) => {
-        //     if(value.province === event.target[0].value){
-        //             document.querySelector('.content').innerHTML = `
-        //             <div class="row my-5">
-        //                 <div class="col-12 bg-success p-2 text-dark bg-opacity-25">
-        //                     <h2>วันที่อัปเดตล่าสุด ${value.update_date}</h2>
-        //                 </div>
-        //             </div>
-        //             <div class="row my-5 gap-5">
-        //                 <div class="card col-5 shadow p-3 rounded  border-0 ">
-        //                     <div class="card-body">
-        //                         <i class="bi bi-geo-alt-fill fs-1"></i>
-        //                         <h2 class="card-header mb-3 bg-white">จังหวัด</h2>
-        //                         <h3 class="card-title">${value.province}</h3>
-        //                     </div>
-        //                 </div>
-        //                 <div class="card col-5 shadow p-3 rounded  border-0 ">
-        //                     <div class="card-body">
-        //                         <i class="bi bi-hospital-fill fs-1"></i>
-        //                         <h2 class="card-header mb-3 bg-white">ผู้ป่วยรายใหม่</h2>
-        //                         <h3 class="card-title">${value.new_case}</h3>
-        //                     </div>
-        //                 </div>
-        //             </div>
-        //             <div class="row my-5 gap-5">
-        //             <div class="card col-5 shadow p-3 rounded  border-0 ">
-        //             <div class="card-body">
-        //                 <i class="bi bi-heart-pulse-fill fs-1"></i>
-        //                 <h2 class="card-header mb-3 bg-white">ผู้ป่วยสะสม</h2>
-        //                 <h3 class="card-title">${value.total_case}</h3>
-        //             </div>
-        //             </div>
-        //             <div class="card col-5 shadow p-3 rounded  border-0 ">
-        //                 <div class="card-body">
-        //                     <i class="bi bi-clipboard2-pulse-fill fs-1"></i>
-        //                     <h2 class="card-header mb-3 bg-white">ผู้ป่วยเสียชีวิตรายใหม่</h2>
-        //                     <h3 class="card-title">${value.new_death}</h3>
-        //                 </div>
-        //             </div>
-        //             </div>
-        //         `
-        //         createChart();
-        //         process.exit();
-        //     } 
-        //     index += 1;
-        // })
+        /*
+            val.filter((value , index) => {
+                if(value.province === event.target[0].value){
+                    document.querySelector('.content').innerHTML = `
+                        <div class="row my-5">
+                            <div class="col-12 bg-success p-2 text-dark bg-opacity-25">
+                                <h2>วันที่อัปเดตล่าสุด ${value.update_date}</h2>
+                            </div>
+                        </div>
+                        <div class="row my-5 gap-5">
+                            <div class="card col-5 shadow p-3 rounded  border-0 ">
+                                <div class="card-body">
+                                    <i class="bi bi-geo-alt-fill fs-1"></i>
+                                    <h2 class="card-header mb-3 bg-white">จังหวัด</h2>
+                                    <h3 class="card-title">${value.province}</h3>
+                                </div>
+                            </div>
+                            <div class="card col-5 shadow p-3 rounded  border-0 ">
+                                <div class="card-body">
+                                    <i class="bi bi-hospital-fill fs-1"></i>
+                                    <h2 class="card-header mb-3 bg-white">ผู้ป่วยรายใหม่</h2>
+                                    <h3 class="card-title">${value.new_case}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row my-5 gap-5">
+                            <div class="card col-5 shadow p-3 rounded  border-0 ">
+                                <div class="card-body">
+                                    <i class="bi bi-heart-pulse-fill fs-1"></i>
+                                    <h2 class="card-header mb-3 bg-white">ผู้ป่วยสะสม</h2>
+                                    <h3 class="card-title">${value.total_case}</h3>
+                                </div>
+                            </div>
+                            <div class="card col-5 shadow p-3 rounded  border-0 ">
+                                <div class="card-body">
+                                    <i class="bi bi-clipboard2-pulse-fill fs-1"></i>
+                                    <h2 class="card-header mb-3 bg-white">ผู้ป่วยเสียชีวิตรายใหม่</h2>
+                                    <h3 class="card-title">${value.new_death}</h3>
+                                </div>
+                            </div>
+                        </div>
+                `
+                createChart();
+                process.exit();
+            } 
+        })
+        */
     })
 }
 
 export { search };
-export default function Form(){
+export default function Form() {
     return `
         <form class="d-flex flex-column align-item-center justify-content-center gap-3 text-center mt-5">
             <h2 class="text-center"><a href="#" class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">ค้นหาข้อมูลสถานการณ์ผู้ติดเชื้อ COVID-19 ในแต่ละจังหวัด</a></h2>
